@@ -9,22 +9,26 @@ import userRouter from "./routes/user.routes.js"
 import messageRouter from "./routes/message.routes.js"
 import { app, server } from "./socket/socket.js"
 
-const port=process.env.PORT || 5000
-
+const port = process.env.PORT || 5000
 
 app.use(cors({
-    origin:"http://localhost:5173",
-    credentials:true
+    origin: "http://localhost:5173",
+    credentials: true
 }))
 app.use(express.json())
 app.use(cookieParser())
-app.use("/api/auth",authRouter)
-app.use("/api/user",userRouter)
-app.use("/api/message",messageRouter)
+app.use("/api/auth", authRouter)
+app.use("/api/user", userRouter)
+app.use("/api/message", messageRouter)
 
-
-
-server.listen(port,()=>{
-    connectDb()
-    console.log("server started")
-})
+// Connect to DB first, then start server
+connectDb()
+  .then(() => {
+    server.listen(port, () => {
+      console.log("server started")
+    })
+  })
+  .catch((err) => {
+    console.error("DB connection error:", err.message)
+    process.exit(1) // stop the app if DB fails
+  })
