@@ -13,7 +13,7 @@ export const serverUrl = 'https://chat-app-m706.onrender.com';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter basename="/Chat-App">
+    <BrowserRouter>
       <Provider store={store}>
         <App />
       </Provider>
