@@ -9,7 +9,7 @@ import { store } from './redux/store.js';
 import './index.css';
 
 // If you need this elsewhere, export after all imports
-export const serverUrl = 'http://localhost:8000';
+export const serverUrl = 'https://chat-app-m706.onrender.com';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <StrictMode>
